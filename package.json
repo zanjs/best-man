@@ -1,0 +1,47 @@
+{
+  "name": "best-man",
+  "description": "Best NPM scripts runner",
+  "version": "0.1.1",
+  "license": "MIT",
+  "author": "Julian",
+  "main": "bin/index.js",
+  "bin": {
+    "btm": "bin/index.js",
+    "best-man": "bin/index.js"
+  },
+  "scripts": {
+    "test:env": "node bin/index.js test:env",
+    "test:params": "node bin/index.js --silent test:params --test",
+    "test:command:object": "node bin/index.js test:command:object",
+    "test:command:string": "node bin/index.js test:command:string",
+    "test:silent": "node bin/index.js test:command:object -s && node bin/index.js test:command:object --silent",
+    "test": "npm run test:env npm run test:params && npm run test:command:object && npm run test:command:string && npm run test:silent"
+  },
+  "dependencies": {
+    "commander": "^4.0.1",
+    "dotenv": "^8.2.0",
+    "object-assign": "^4.1.1"
+  },
+  "bestScripts": {
+    "test:command:string": "node ./test/command.js",
+    "test:command:object": {
+      "command": "node ./test/command.js"
+    },
+    "test:params": {
+      "command": "node ./test/params.js"
+    },
+    "test:env": {
+      "command": "node ./test/env.js",
+      "env": {
+        "FOO": "bar"
+      }
+    },
+    "test:env-extend": {
+      "command": "node ./test/env-extend.js",
+      "env": {
+        "TEST_ENV": "overridden",
+        "FOO": "bar"
+      }
+    }
+  }
+}
